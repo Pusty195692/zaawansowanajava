@@ -1,52 +1,23 @@
 package com.zjava.model;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 /**
  * Created by Adrian on 2017-06-06.
  */
+@Data
+@NoArgsConstructor
 public class AircraftType {
-    String longDescription;
-    int schemaVersion;
-    String shortDescription;
-    int iatamain;
-    int iatasub;
+    private String longDescription;
 
-    public String getLongDescription() {
-        return longDescription;
-    }
+    private Integer schemaVersion;
 
-    public void setLongDescription(String longDescription) {
-        this.longDescription = longDescription;
-    }
+    private String shortDescription;
 
-    public int getSchemaVersion() {
-        return schemaVersion;
-    }
+    private Integer iatamain;
 
-    public void setSchemaVersion(int schemaVersion) {
-        this.schemaVersion = schemaVersion;
-    }
+    private Integer iatasub;
 
-    public String getShortDescription() {
-        return shortDescription;
-    }
 
-    public void setShortDescription(String shortDescription) {
-        this.shortDescription = shortDescription;
-    }
-
-    public int getIatamain() {
-        return iatamain;
-    }
-
-    public void setIatamain(int iatamain) {
-        this.iatamain = iatamain;
-    }
-
-    public int getIatasub() {
-        return iatasub;
-    }
-
-    public void setIatasub(int iatasub) {
-        this.iatasub = iatasub;
-    }
 }

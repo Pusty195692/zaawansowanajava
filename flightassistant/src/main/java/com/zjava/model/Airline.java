@@ -1,52 +1,23 @@
 package com.zjava.model;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 /**
  * Created by Adrian on 2017-06-06.
  */
+@Data
+@NoArgsConstructor
 public class Airline {
-    int schemaVersion;
-    String iata;
-    String publicName;
-    String icao;
-    int nvls;
+    private Integer schemaVersion;
 
-    public int getSchemaVersion() {
-        return schemaVersion;
-    }
+    private String iata;
 
-    public void setSchemaVersion(int schemaVersion) {
-        this.schemaVersion = schemaVersion;
-    }
+    private String publicName;
 
-    public String getIata() {
-        return iata;
-    }
+    private String icao;
 
-    public void setIata(String iata) {
-        this.iata = iata;
-    }
+    private Integer nvls;
 
-    public String getPublicName() {
-        return publicName;
-    }
 
-    public void setPublicName(String publicName) {
-        this.publicName = publicName;
-    }
-
-    public String getIcao() {
-        return icao;
-    }
-
-    public void setIcao(String icao) {
-        this.icao = icao;
-    }
-
-    public int getNvls() {
-        return nvls;
-    }
-
-    public void setNvls(int nvls) {
-        this.nvls = nvls;
-    }
 }
