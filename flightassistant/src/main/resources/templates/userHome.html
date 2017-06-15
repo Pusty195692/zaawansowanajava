@@ -1,10 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
 <head>
-    <meta charset="UTF-8"/>
     <title>User home</title>
 </head>
 <body>
-Widok zwykłego usera !!!
+<div layout:fragment="content">
+    Widok zwykłego usera !!!
+</div>
 </body>
 </html>

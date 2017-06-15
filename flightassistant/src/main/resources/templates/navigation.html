@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" >
+<head>
+</head>
+<body>
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0" th:fragment="nav" sec:authorize="isAuthenticated()">
+<div class="menu">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a href="#">Flight Assistant</a>
+        </div>
+        <div>
+            <ul class="nav navbar-nav navbar-right">
+                <li th:if="${showBackLink == null || showBackLink}">
+                    <a th:href="@{/}">
+                        <i class="fa fa-arrow-left" aria-hidden="true"></i> Powrót
+                    </a>
+                </li>
+                <li>
+                    <form th:action="@{/logout}" method="POST">
+                        <button class="btn-link" type="submit">
+                            <i class="fa fa-sign-out fa-fw"></i> Wyloguj
+                        </button>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+</nav>
+</body>
+</html>
