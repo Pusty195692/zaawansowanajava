@@ -15,9 +15,9 @@ public class AircraftType {
 
     private String shortDescription;
 
-    private Integer iatamain;
+    private String iatamain;
 
-    private Integer iatasub;
+    private String iatasub;
 
 
 }
