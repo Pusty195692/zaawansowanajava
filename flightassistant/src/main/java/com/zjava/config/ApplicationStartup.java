@@ -14,6 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -52,7 +53,6 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 
     private void initializeAdminUser() {
         log.info("initializeAdminUser method invoked");
-
         Optional<Role> role = roleService.findRoleByName(Role.Name.ADMIN);
         if (!role.isPresent()) {
             log.warn("ApplicationStartup.initializeAdminUser() - Initializing admin failed!!");

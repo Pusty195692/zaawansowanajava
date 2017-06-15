@@ -6,14 +6,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
- * Created by Rafal Lebioda on 13.06.2017.
+ * Created by Rafal Lebioda on 15.06.2017.
  */
 @Log4j2
 @Controller
-public class AdminController {
+public class UserController {
 
-    @RequestMapping(value = "/admin/home")
+    @RequestMapping(value = "/user/home")
     public ModelAndView admin() {
-        return new ModelAndView("adminHome", "showBackLink", false);
+        return new ModelAndView("userHome", "showBackLink", false);
     }
 }

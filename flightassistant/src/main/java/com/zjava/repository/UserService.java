@@ -13,6 +13,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import javax.inject.Inject;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 
 /**
@@ -25,6 +28,13 @@ public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
+
+    public List<User> findAllUsers() {
+        log.info("Searching all users");
+
+        return StreamSupport.stream(userRepository.findAll().spliterator(), false)
+                .collect(Collectors.toList());
+    }
 
     @Override
     public User loadUserByUsername(String email) {
@@ -72,6 +82,8 @@ public class UserService implements UserDetailsService {
             throw new EmailNotUniqueException(e);
         }
     }
+
+
 
 
 }
