@@ -1,4 +1,4 @@
-package com.zjava.repository;
+package com.zjava.service;
 
 import com.zjava.model.Role;
 import com.zjava.repository.RoleRepository;

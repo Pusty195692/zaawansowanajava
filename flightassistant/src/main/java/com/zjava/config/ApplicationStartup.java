@@ -3,8 +3,8 @@ package com.zjava.config;
 import com.zjava.exception.EmailNotUniqueException;
 import com.zjava.model.Role;
 import com.zjava.model.User;
-import com.zjava.repository.RoleService;
-import com.zjava.repository.UserService;
+import com.zjava.service.RoleService;
+import com.zjava.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -14,7 +14,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.Collections;
-import java.util.List;
 import java.util.Optional;
 
 /**
