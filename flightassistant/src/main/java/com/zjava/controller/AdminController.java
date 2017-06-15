@@ -14,6 +14,6 @@ public class AdminController {
 
     @RequestMapping(value = "/admin")
     public ModelAndView admin() {
-        return new ModelAndView("login", "showBackLink", false);
+        return new ModelAndView("admin", "showBackLink", false);
     }
 }
