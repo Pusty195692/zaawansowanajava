@@ -25,22 +25,20 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @NotNull
     @Column(length = 40)
-    @Size(min = 2, max = 40)
+    @Size(min = 0, max = 40)
     @Pattern(regexp = "^\\p{L}{2,40}$")
     private String firstName;
 
-    @NotNull
+
     @Column(length = 40)
-    @Size(min = 2, max = 40)
+    @Size(min = 0, max = 40)
     @Pattern(regexp = "^\\p{L}{2,40}$")
     private String lastName;
 
-    @NonNull
-    @NotNull
+
     @Column(length = 40, unique = true)
-    @Size(min = 6, max = 40)
+    @Size(min = 0, max = 40)
     @Pattern(regexp = "^[a-z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-z0-9.-]+$")
     private String email;
 
@@ -48,7 +46,7 @@ public class User implements UserDetails {
     @Size(min = 5, max = 64)
     private String password;
 
-    @NotNull
+
     @Column
     @Pattern(regexp = "^(\\+48)[5-9][0-9]{8}$")
     private String phoneNumber;
