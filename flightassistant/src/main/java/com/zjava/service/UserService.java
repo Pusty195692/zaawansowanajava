@@ -158,7 +158,7 @@ public class UserService implements UserDetailsService {
         List<String> to = new ArrayList<>();
         to.add(user.getEmail());
         String url = protocol + "://" + host + ":" + port + "/account/password/change/reset/token/" + token;
-        Message message = new Message("flightassistant@gmail.com", to, "Reset password", url);
+        Message message = new Message("flightassistant2017@gmail.com", to, "Reset password", url);
         return message.constructEmail();
     }
 
