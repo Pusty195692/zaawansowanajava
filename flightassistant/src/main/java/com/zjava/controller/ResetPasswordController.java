@@ -1,5 +1,6 @@
 package com.zjava.controller;
 
+import com.zjava.controller.model.ResetPassword;
 import com.zjava.controller.model.UserEmail;
 import com.zjava.model.User;
 import com.zjava.service.EmailService;
@@ -12,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -66,6 +68,39 @@ public class ResetPasswordController {
         userService.createPasswordResetTokenForUser(user, token);
         emailService.sendEmail(userService.constructResetTokenEmail(user, token));
         attributes.addFlashAttribute("sendOrNotSend", "Mail do resetowania hasła został wysłany na podany adres e-mail");
+        return "redirect:/login";
+    }
+
+    @GetMapping("account/password/change/reset/token/{token}")
+    public String getChangePasswordView(@PathVariable("token") final String token, @ModelAttribute ResetPassword resetPassword, Model model) {
+        resetPassword.setResetToken(token);
+        model.addAttribute("resetPassword", resetPassword);
+        return CHANGE_VIEW;
+    }
+
+    @PostMapping(value = "account/password/change/save")
+    public String changePassword(@Valid ResetPassword resetPassword, BindingResult bindingResult, Model model, RedirectAttributes attributes) {
+
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("resetPassword", resetPassword);
+            model.addAttribute("errors", bindingResult.getFieldErrors());
+            log.info("Reset token validation error." + bindingResult.getAllErrors());
+            return CHANGE_VIEW;
+        }
+
+        if (resetPassword == null) {
+            log.info("token is null");
+            return REDIRECT_FORGET_VIEW;
+        }
+
+        if (userService.validatePasswordResetToken(resetPassword.getResetToken(), resetPassword.getUserMail())) {
+            userService.changePassword(userService.findUserByEmail(resetPassword.getUserMail()), resetPassword.getNewPassword());
+            attributes.addFlashAttribute("passwordChangedOrNotChanged", "Hasło zostało zmienione");
+            return "redirect:/login";
+        }
+
+        log.info("Failed to change password user " + userService.findUserByEmail(resetPassword.getUserMail()).getUsername());
+        attributes.addFlashAttribute("passwordChangedOrNotChanged", "If user exists, mail was changed.");
         return "redirect:/login";
     }
 

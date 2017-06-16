@@ -14,6 +14,10 @@
         <!--<p th:text="${#messages.msg('sendOrNotSend')}"></p> -->
         Email został wysłany na podany adres email.
     </div>
+    <div th:if="${passwordChangedOrNotChanged} != null" class="alert alert-info">
+        <!--<p th:text="${#messages.msg('passwordChangedOrNotChanged')}"></p> -->
+        Hasło zostało zmienione.
+    </div>
 
 <div class="loginmodal-container">
     <h1>Login to Your Account</h1><br/>
