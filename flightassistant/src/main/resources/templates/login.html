@@ -9,6 +9,12 @@
 </head>
 <body>
 <div layout:fragment="content">
+
+    <div th:if="${sendOrNotSend} != null" class="alert alert-info">
+        <!--<p th:text="${#messages.msg('sendOrNotSend')}"></p> -->
+        Email został wysłany na podany adres email.
+    </div>
+
 <div class="loginmodal-container">
     <h1>Login to Your Account</h1><br/>
     <form th:action="@{/login}" method="post" role="form">
@@ -18,7 +24,7 @@
     </form>
 
     <div class="login-help">
-        <a href="#">Register</a> - <a href="#">Forgot Password</a>
+        <a href="#">Register</a> - <a th:href="@{/account/password/change}">Forgot Password</a>
     </div>
 </div>
 </div>
