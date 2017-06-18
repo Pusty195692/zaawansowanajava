@@ -4,14 +4,23 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Date;
 
 /**
  * Created by Adrian on 2017-06-06.
  */
 @Data
+@Entity
 @NoArgsConstructor
+@Table(name = "FLIGHTS")
 public class Flight {
+
+    @Id
+    private Long id;
     private String prefixIATA;
     @JsonProperty("serviceType")
     private String serviceType;
@@ -24,7 +33,6 @@ public class Flight {
     private Date scheduleDate;
     private String flightDirection;
     private Integer airlineCode;
-    private Long id;
     private String mainFlight;
     @JsonIgnore
     private String transferPositions;

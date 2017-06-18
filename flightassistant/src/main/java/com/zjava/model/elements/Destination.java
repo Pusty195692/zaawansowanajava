@@ -3,14 +3,22 @@ package com.zjava.model.elements;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
 import java.util.HashMap;
 
 /**
  * Created by Adrian on 2017-06-06.
  */
 @Data
+@Entity
 @NoArgsConstructor
+@Table(name = "DESTINATIONS")
 public class Destination {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
+
     private String country;
 
     private Integer schemaVersion;
