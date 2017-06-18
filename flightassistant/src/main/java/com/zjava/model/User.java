@@ -66,6 +66,9 @@ public class User implements UserDetails {
     @Column
     private boolean enabled = true;
 
+    @Column
+    private boolean isActive = false;
+
     @ManyToMany(fetch = FetchType.EAGER)
     private Collection<Role> roles = new ArrayList<>();
 
