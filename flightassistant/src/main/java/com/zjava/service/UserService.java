@@ -15,6 +15,9 @@ import org.springframework.beans.factory.annotation.Value;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.mail.SimpleMailMessage;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -179,6 +182,25 @@ public class UserService implements UserDetailsService {
         String url = protocol + "://" + host + ":" + port + "/account/register/confirm/token/" + token;
         Message message = new Message("flightassistant2017@gmail.com", to, "Confirm email", url);
         return message.constructEmail();
+    }
+
+    public User updateUser(User user) throws EmailNotUniqueException{
+        try {
+            log.info("Updating user: " + user);
+            User userToUpdate = userRepository.findOne(user.getId());
+            userToUpdate.setFirstName(user.getFirstName());
+            userToUpdate.setLastName(user.getLastName());
+            userToUpdate.setPhoneNumber(user.getPhoneNumber());
+            userToUpdate.setEmail(user.getEmail().toLowerCase());
+            userToUpdate.setProfileImageUrl(user.getProfileImageUrl());
+            userToUpdate=userRepository.save(userToUpdate);
+            Authentication authentication = new UsernamePasswordAuthenticationToken(user, user.getPassword(), user.getAuthorities());
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+            return userToUpdate;
+        }
+        catch (DataIntegrityViolationException e) {
+            throw new EmailNotUniqueException(e);
+        }
     }
 
 
