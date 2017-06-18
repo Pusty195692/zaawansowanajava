@@ -1,5 +1,6 @@
 package com.zjava.api;
 
+import com.zjava.controller.DataController;
 import com.zjava.model.elements.AircraftType;
 import com.zjava.model.elements.Airline;
 import com.zjava.model.elements.Destination;
@@ -17,29 +18,29 @@ public class ApiTests {
 
     @Test
     public void getAircraftTypes() throws Exception {
-        GetData getData = new GetData();
-        List<AircraftType> aircraftTypes = getData.getObjectsList(new AircraftType(), AircraftType.class,  "v1", "aircraftTypes");
+        DataController dataController = new DataController();
+        List<AircraftType> aircraftTypes = dataController.getObjectsList(new AircraftType(), AircraftType.class,  "v1", "aircraftTypes");
         assertEquals(aircraftTypes.get(0).getClass(), AircraftType.class);
     }
 
     @Test
     public void getAirlines() throws Exception {
-        GetData getData = new GetData();
-        List<Airline> airlines = getData.getObjectsList(new Airline(), Airline.class,  "v1", "airlines");
+        DataController dataController = new DataController();
+        List<Airline> airlines = dataController.getObjectsList(new Airline(), Airline.class,  "v1", "airlines");
         assertEquals(airlines.get(0).getClass(), Airline.class);
     }
 
     @Test
     public void getDestinations() throws Exception {
-        GetData getData = new GetData();
-        List<Destination> destinations = getData.getObjectsList(new Destination(), Destination.class,  "v1", "destinations");
+        DataController dataController = new DataController();
+        List<Destination> destinations = dataController.getObjectsList(new Destination(), Destination.class,  "v1", "destinations");
         assertEquals(destinations.get(0).getClass(), Destination.class);
     }
 
     @Test
     public void getFlights() throws Exception {
-        GetData getData = new GetData();
-        List<Flight> flights = getData.getObjectsList(new Flight(), Flight.class,  "v3", "flights");
+        DataController dataController = new DataController();
+        List<Flight> flights = dataController.getObjectsList(new Flight(), Flight.class,  "v3", "flights");
         assertEquals(flights.get(0).getClass(), Flight.class);
     }
 

@@ -1,6 +1,6 @@
 package com.zjava.model.elements;
 
-import com.zjava.api.GetData;
+import com.zjava.controller.DataController;
 import com.zjava.repository.elements.DestinationRepository;
 import com.zjava.service.elements.DestinationService;
 import lombok.extern.log4j.Log4j2;
@@ -35,8 +35,8 @@ public class DestinationTest {
 
     @Before
     public void beforeTests() throws Exception {
-        GetData getData = new GetData();
-        fromApi = getData.getObjectsList(new Destination(), Destination.class,  "v1", "destinations");
+        DataController dataController = new DataController();
+        fromApi = dataController.getObjectsList(new Destination(), Destination.class,  "v1", "destinations");
         for(Destination destination : fromApi) {
             destinationService.save(destination);
         }

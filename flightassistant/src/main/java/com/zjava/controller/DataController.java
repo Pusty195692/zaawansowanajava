@@ -1,7 +1,17 @@
-package com.zjava.api;
+package com.zjava.controller;
 
+import antlr.BaseAST;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.TypeFactory;
+import com.zjava.model.elements.AircraftType;
+import com.zjava.model.elements.Airline;
+import com.zjava.model.elements.Destination;
+import com.zjava.model.elements.Flight;
+import com.zjava.repository.elements.AircraftTypeRepository;
+import com.zjava.repository.elements.AirlineRepository;
+import com.zjava.repository.elements.DestinationRepository;
+import com.zjava.repository.elements.FlightRepository;
+import lombok.extern.log4j.Log4j2;
 import org.apache.http.HttpResponse;
 import org.apache.http.ParseException;
 import org.apache.http.client.HttpClient;
@@ -11,16 +21,36 @@ import org.apache.http.util.EntityUtils;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static jdk.nashorn.internal.runtime.regexp.joni.Config.log;
+
 /**
  * Created by Adrian on 2017-06-06.
  */
-public class GetData {
+@Controller("/admin/home/updateDatabase")
+@Log4j2
+public class DataController {
+
+    @Autowired
+    AircraftTypeRepository aircraftTypeRepository;
+    @Autowired
+    AirlineRepository airlineRepository;
+    @Autowired
+    DestinationRepository destinationRepository;
+    @Autowired
+    FlightRepository flightRepository;
+
 
     /**
      * Metoda zwracajaca liste obiektow rozpoznawalnych dla aplikacji. Typ obiektow okreslony jest parametrami funkcji
@@ -94,6 +124,51 @@ public class GetData {
         return httpClient.execute(request);
     }
 
+    @RequestMapping(value = "admin/updateDatabase/updateAircrafts", method = RequestMethod.GET)
+    public String getAircraftTypes(Model model) throws Exception {
+        List<AircraftType> aircraftTypes = getObjectsList(new AircraftType(), AircraftType.class,  "v1", "aircraftTypes");
+        for(AircraftType a : aircraftTypes) {
+            aircraftTypeRepository.save(a);
+        }
+        model.addAttribute("aircrafts", aircraftTypeRepository.findAll());
+        return "elements/aircraftsList";
+    }
+
+    @RequestMapping(value = "admin/updateDatabase/updateAirlines", method = RequestMethod.GET)
+    public String getAirlines(Model model) throws Exception {
+        List<Airline> airlines = getObjectsList(new Airline(), Airline.class,  "v1", "airlines");
+        for(Airline a : airlines) {
+            airlineRepository.save(a);
+        }
+        model.addAttribute("airlines", airlineRepository.findAll());
+        return "elements/airlinesList";
+    }
+
+    @RequestMapping(value = "admin/updateDatabase/updateDestinations", method = RequestMethod.GET)
+    public String getDestinations(Model model) throws Exception {
+        List<Destination> destinations = getObjectsList(new Destination(), Destination.class,  "v1", "destinations");
+        for(Destination d : destinations) {
+            destinationRepository.save(d);
+        }
+        model.addAttribute("destinations", destinationRepository.findAll());
+        return "elements/destinationsList";
+    }
+
+    @RequestMapping(value = "admin/updateDatabase/updateFlights", method = RequestMethod.GET)
+    public String getFlights(Model model) throws Exception {
+        List<Flight> flights = getObjectsList(new Flight(), Flight.class,  "v3", "flights");
+        for(Flight f : flights) {
+            flightRepository.save(f);
+        }
+        model.addAttribute("flights", flightRepository.findAll());
+        return "elements/flightsList";
+    }
+
+//    @RequestMapping(value = "aircraftTypes", method = RequestMethod.GET)
+//    public String messages(Model model) {
+//        model.addAttribute("aircraftTypes", aircraftTypeRepository.findAll());
+//        return "aircraftTypes/list";
+//    }
 
     /**********************************************************STARE METODY*******************************************************************/
 
@@ -127,20 +202,20 @@ public class GetData {
         return elements;
     }
 
-    public JSONArray getFlightsJSONArray() throws org.json.simple.parser.ParseException {
-        return getDataJSONArray("public-flights/flights", "v3", "flights");
-    }
-
-    public JSONArray getDestinationsJSONArray() throws org.json.simple.parser.ParseException {
-        return getDataJSONArray("public-flights/destinations", "v1", "destinations");
-    }
-
-    public JSONArray getAircraftTypesJSONArray() throws org.json.simple.parser.ParseException {
-        return getDataJSONArray("public-flights/aircrafttypes", "v1", "aircraftTypes");
-    }
-
-    public JSONArray getAirlinesJSONArray() throws org.json.simple.parser.ParseException {
-        return getDataJSONArray("public-flights/airlines", "v1", "airlines");
-    }
+//    public JSONArray getFlightsJSONArray() throws org.json.simple.parser.ParseException {
+//        return getDataJSONArray("public-flights/flights", "v3", "flights");
+//    }
+//
+//    public JSONArray getDestinationsJSONArray() throws org.json.simple.parser.ParseException {
+//        return getDataJSONArray("public-flights/destinations", "v1", "destinations");
+//    }
+//
+//    public JSONArray getAircraftTypesJSONArray() throws org.json.simple.parser.ParseException {
+//        return getDataJSONArray("public-flights/aircrafttypes", "v1", "aircraftTypes");
+//    }
+//
+//    public JSONArray getAirlinesJSONArray() throws org.json.simple.parser.ParseException {
+//        return getDataJSONArray("public-flights/airlines", "v1", "airlines");
+//    }
 }
 

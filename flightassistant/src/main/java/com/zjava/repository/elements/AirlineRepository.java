@@ -3,6 +3,7 @@ package com.zjava.repository.elements;
 import com.zjava.model.elements.Airline;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 import java.util.List;
 
@@ -13,6 +14,7 @@ import java.util.List;
 public interface AirlineRepository extends CrudRepository<Airline, Long> {
     Airline save(Airline flight);
 
+    @ModelAttribute("airlines")
     List<Airline> findAll();
 
     Airline findOne(Long id);

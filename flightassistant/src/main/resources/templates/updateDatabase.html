@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+<head>
+    <title>Update Database</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <table style="width: 100%;height: 700px;border-collapse: separate;;border-spacing: 20px;">
+        <td>
+            <tr style="height: 50%">
+                <form th:action="@{/admin/updateDatabase/updateAircrafts}" method="GET">
+                    <button class="btn-link" type="submit">
+                        <i class="fa fa-sign-out fa-fw"></i> Uaktualnij Samoloty
+                    </button>
+                </form>
+            </tr>
+        </td>
+        <td>
+            <tr style="height: 50%">
+                <form th:action="@{/admin/updateDatabase/updateAirlines}" method="GET">
+                    <button class="btn-link" type="submit">
+                        <i class="fa fa-sign-out fa-fw"></i> Uaktualnij Linie lotnicze
+                    </button>
+                </form>
+            </tr>
+        </td>
+        <td>
+            <tr style="height: 50%">
+                <form th:action="@{/admin/updateDatabase/updateDestinations}" method="GET">
+                    <button class="btn-link" type="submit">
+                        <i class="fa fa-sign-out fa-fw"></i> Uaktualnij Destynacje
+                    </button>
+                </form>
+            </tr>
+        </td>
+        <td>
+            <tr style="height: 50%">
+                <form th:action="@{/admin/updateDatabase/updateFlights}" method="GET">
+                    <button class="btn-link" type="submit">
+                        <i class="fa fa-sign-out fa-fw"></i> Uaktualnij Loty
+                    </button>
+                </form>
+            </tr>
+        </td>
+    </table>
+</div>
+</body>
+</html>

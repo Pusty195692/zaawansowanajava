@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+<head>
+    <title>Admin page</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <table style="width: 100%;height: 700px;border-collapse: separate;;border-spacing: 20px;">
+        <tr th:each="aircraft : ${aircrafts}">
+            <td th:text="${aircraft.id}"></td>
+
+            <td th:text="${aircraft.longDescription}"></td>
+
+            <td th:text="${aircraft.schemaVersion}"></td>
+
+            <td th:text="${aircraft.shortDescription}"></td>
+
+            <td th:text="${aircraft.iatamain}"></td>
+
+            <td th:text="${aircraft.iatasub}"></td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

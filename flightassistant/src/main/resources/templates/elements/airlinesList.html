@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+<head>
+    <title>Admin page</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <table style="width: 100%;height: 700px;border-collapse: separate;;border-spacing: 20px;">
+        <tr th:each="airline : ${airlines}">
+            <td th:text="${airline.id}"></td>
+            <td th:text="${airline.schemaVersion}"></td>
+            <td th:text="${airline.iata}"></td>
+            <td th:text="${airline.publicName}"></td>
+            <td th:text="${airline.icao}"></td>
+            <td th:text="${airline.nvls}"></td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
