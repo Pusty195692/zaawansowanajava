@@ -7,6 +7,9 @@ jdk:
 
 install: true
   
+env:
+  - MAVEN_VERSION=3.2.5
+  
 cache: 
  directories: 
  - '$HOME/.m2' 
