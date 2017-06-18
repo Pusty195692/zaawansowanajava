@@ -27,9 +27,9 @@ import java.net.MalformedURLException;
 @Log4j2
 public class ResetPasswordController {
 
-    private static final String FORGET_VIEW = "password/forget";
-    private static final String CHANGE_VIEW = "password/change";
-    private static final String REDIRECT_FORGET_VIEW = "redirect:/account/password/change";
+    protected static final String FORGET_VIEW = "password/forget";
+    protected static final String CHANGE_VIEW = "password/change";
+    protected static final String REDIRECT_FORGET_VIEW = "redirect:/account/password/change";
 
     @Autowired
     private EmailService emailService;
@@ -55,12 +55,14 @@ public class ResetPasswordController {
 
         if (userEmail.getUserMail().isEmpty()) {
             model.addAttribute("error", new ObjectError("mailIsEmpty", "Proszę wpisać adres email"));
+            model.addAttribute("userEmail", userEmail);
             return REDIRECT_FORGET_VIEW;
         }
         User user = userService.findUserByEmail(userEmail.getUserMail());
 
         if (user == null) {
             model.addAttribute("info", new ObjectError("sendOrNotSend", "Email został wysłany"));
+            model.addAttribute("userEmail", userEmail);
             return REDIRECT_FORGET_VIEW;
         }
 
@@ -90,7 +92,7 @@ public class ResetPasswordController {
 
         if (resetPassword == null) {
             log.info("token is null");
-            return REDIRECT_FORGET_VIEW;
+            return "redirect:/login";
         }
 
         if (userService.validatePasswordResetToken(resetPassword.getResetToken(), resetPassword.getUserMail())) {
@@ -100,7 +102,7 @@ public class ResetPasswordController {
         }
 
         log.info("Failed to change password user " + userService.findUserByEmail(resetPassword.getUserMail()).getUsername());
-        attributes.addFlashAttribute("passwordChangedOrNotChanged", "If user exists, mail was changed.");
+        attributes.addFlashAttribute("passwordChangedOrNotChanged", "If user exists, password was changed.");
         return "redirect:/login";
     }
 
