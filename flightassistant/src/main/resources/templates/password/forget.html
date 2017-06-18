@@ -10,8 +10,16 @@
 <body>
     <div layout:fragment="content">
 
-        <div th:if="${errors != null}" class="row">
+        <!--<div th:if="${errors != null}" class="row">
             <div class="alert alert-danger fade in" th:each="error : ${errors}">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                &lt;!&ndash;<span th:text="${error.defaultMessage}"></span> &ndash;&gt;
+                Niepoprawny email
+            </div>
+        </div>-->
+
+        <div th:if="${errors != null}" class="row">
+            <div class="alert alert-danger fade in">
                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                 <!--<span th:text="${error.defaultMessage}"></span> -->
                 Niepoprawny email
