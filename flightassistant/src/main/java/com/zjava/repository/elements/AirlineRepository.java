@@ -25,7 +25,7 @@ public interface AirlineRepository extends CrudRepository<Airline, Long> {
 
     long count();
 
-//    void delete(Long id);
+    void delete(Long id);
 //
 //    void delete(List<Airline> flights);
 

@@ -4,6 +4,8 @@ import com.zjava.api.GetData;
 import com.zjava.repository.elements.AircraftTypeRepository;
 import com.zjava.service.elements.AircraftService;
 import lombok.extern.log4j.Log4j2;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +31,16 @@ public class AircraftTypeTest {
     @Autowired
     private AircraftTypeRepository aircraftTypeRepository;
 
+    @Before
+    public void beforeTests() {
+
+    }
+
+    @After
+    public void afterTests() {
+
+    }
+
     @Test
     public void testFindAll() throws Exception {
         GetData getData = new GetData();
@@ -37,12 +49,13 @@ public class AircraftTypeTest {
             aircraftService.save(aircraftType);
         }
         List<AircraftType> fromCRUD = aircraftService.findAll();
+        long count = aircraftService.count();
         assertEquals(fromApi.size(), fromCRUD.size());
     }
 
     @Test
     public void testCount() throws Exception {
-        long a = aircraftTypeRepository.count();
+        long a = aircraftService.count();
         System.out.println();
     }
 }

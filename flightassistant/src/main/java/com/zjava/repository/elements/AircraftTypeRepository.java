@@ -19,13 +19,13 @@ public interface AircraftTypeRepository extends CrudRepository<AircraftType, Lon
 
     boolean exists(Long id);
 
-//    List<AircraftType> save(List<AircraftType> entities);
+//    List<AircraftType> save(List<AircraftType> aircraftTypes);
 //
 //    List<AircraftType> findAll(List<Long> ids);
 
     long count();
 
-//    void delete(Long id);
+    void delete(Long id);
 //
 //    void delete(List<AircraftType> flights);
 
