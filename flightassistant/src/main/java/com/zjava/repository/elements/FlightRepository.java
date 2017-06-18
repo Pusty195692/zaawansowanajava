@@ -19,15 +19,9 @@ public interface FlightRepository extends CrudRepository<Flight, Long> {
 
     boolean exists(Long id);
 
-//    List<Flight> save(List<Flight> entities);
-//
-//    List<Flight> findAll(List<Long> ids);
-
     long count();
 
-//    void delete(Long id);
-//
-//    void delete(List<Flight> flights);
+    void delete(Long id);
 
     void deleteAll();
 }

@@ -31,31 +31,26 @@ public class AircraftTypeTest {
     @Autowired
     private AircraftTypeRepository aircraftTypeRepository;
 
-    @Before
-    public void beforeTests() {
+    List<AircraftType> fromApi;
 
+    @Before
+    public void beforeTests() throws Exception {
+        GetData getData = new GetData();
+        fromApi = getData.getObjectsList(new AircraftType(), AircraftType.class,  "v1", "aircraftTypes");
+        for(AircraftType aircraftType : fromApi) {
+            aircraftService.save(aircraftType);
+        }
     }
 
     @After
     public void afterTests() {
-
+        aircraftService.deleteAll();
     }
 
     @Test
     public void testFindAll() throws Exception {
-        GetData getData = new GetData();
-        List<AircraftType> fromApi = getData.getObjectsList(new AircraftType(), AircraftType.class,  "v1", "aircraftTypes");
-        for(AircraftType aircraftType : fromApi) {
-            aircraftService.save(aircraftType);
-        }
         List<AircraftType> fromCRUD = aircraftService.findAll();
         long count = aircraftService.count();
         assertEquals(fromApi.size(), fromCRUD.size());
-    }
-
-    @Test
-    public void testCount() throws Exception {
-        long a = aircraftService.count();
-        System.out.println();
     }
 }

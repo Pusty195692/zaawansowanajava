@@ -39,7 +39,8 @@ public class Flight {
     @Column
     private String expectedTimeBoarding;
 
-    @ManyToOne
+    @OneToOne(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "id")
     private AircraftType aircraftType;
 
     @Column

@@ -40,4 +40,6 @@ public class AirlineService {
     public long count() {
         return airlineRepository.count();
     }
+
+    public void deleteAll() {airlineRepository.deleteAll();}
 }

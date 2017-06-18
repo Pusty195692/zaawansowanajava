@@ -19,15 +19,9 @@ public interface DestinationRepository extends CrudRepository<Destination, Long>
 
     boolean exists(Long id);
 
-//    List<Destination> save(List<Destination> entities);
-//
-//    List<Destination> findAll(List<Long> ids);
-
     long count();
 
-//    void delete(Long id);
-//
-//    void delete(List<Destination> flights);
+    void delete(Long id);
 
     void deleteAll();
 }

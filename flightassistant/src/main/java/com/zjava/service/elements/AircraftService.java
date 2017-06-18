@@ -40,4 +40,6 @@ public class AircraftService {
     public long count() {
         return aircraftTypeRepository.count();
     }
+
+    public void deleteAll() {aircraftTypeRepository.deleteAll();}
 }

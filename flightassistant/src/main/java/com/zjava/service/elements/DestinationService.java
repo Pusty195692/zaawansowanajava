@@ -40,4 +40,6 @@ public class DestinationService {
     public long count() {
         return destinationRepository.count();
     }
+
+    public void deleteAll() {destinationRepository.deleteAll();}
 }
