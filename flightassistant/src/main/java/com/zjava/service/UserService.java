@@ -1,5 +1,6 @@
 package com.zjava.service;
 
+import com.zjava.controller.model.UserDTO;
 import com.zjava.exception.EmailNotUniqueException;
 import com.zjava.model.PasswordResetToken;
 import com.zjava.model.Role;
@@ -8,6 +9,7 @@ import com.zjava.repository.PasswordResetTokenRepository;
 import com.zjava.repository.RoleRepository;
 import com.zjava.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import ma.glasnost.orika.MapperFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import lombok.extern.log4j.Log4j2;
@@ -51,6 +53,9 @@ public class UserService implements UserDetailsService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private MapperFacade orikaMapper;
+
     public List<User> findAllUsers() {
         log.info("Searching all users");
 
@@ -83,8 +88,14 @@ public class UserService implements UserDetailsService {
         }
     }
 
+    public UserDTO addUser(UserDTO user) throws EmailNotUniqueException, SecurityException {
+        User userToUpdateOrAdd = orikaMapper.map(user, User.class);
+        return orikaMapper.map(addUser(userToUpdateOrAdd), UserDTO.class);
+    }
+
     private User trySaveUser(User user, boolean isNewUser, boolean isCurrentAccount) throws EmailNotUniqueException {
         try {
+            user.setPassword(passwordEncoder.encode((user.getPassword())));
             User userToSave = userRepository.save(user);
 
 //            if (isNewUser) {
@@ -159,6 +170,14 @@ public class UserService implements UserDetailsService {
         to.add(user.getEmail());
         String url = protocol + "://" + host + ":" + port + "/account/password/change/reset/token/" + token;
         Message message = new Message("flightassistant2017@gmail.com", to, "Reset password", url);
+        return message.constructEmail();
+    }
+
+    public SimpleMailMessage constructConfirmationEmail(UserDTO userDTO, String token) {
+        List<String> to = new ArrayList<>();
+        to.add(userDTO.getEmail());
+        String url = protocol + "://" + host + ":" + port + "/account/register/confirm/token/" + token;
+        Message message = new Message("flightassistant2017@gmail.com", to, "Confirm email", url);
         return message.constructEmail();
     }
 

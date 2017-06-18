@@ -18,6 +18,10 @@
         <!--<p th:text="${#messages.msg('passwordChangedOrNotChanged')}"></p> -->
         Hasło zostało zmienione.
     </div>
+    <div th:if="${accountCreated} != null" class="alert alert-info">
+        <!--<p th:text="${#messages.msg('passwordChangedOrNotChanged')}"></p> -->
+        Wysłany został mail z potwierdzeniem.
+    </div>
 
 <div class="loginmodal-container">
     <h1>Login to Your Account</h1><br/>

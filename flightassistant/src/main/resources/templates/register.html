@@ -12,13 +12,12 @@
 <div layout:fragment="content">
 
 
-    <!--<div th:if="${errors != null}" class="row">
-        <div class="alert alert-danger fade in">
+    <div th:if="${errors != null}" class="row">
+        <div class="alert alert-danger fade in" th:each="error : ${errors}">
             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
             &lt;!&ndash;<span th:text="${error.defaultMessage}"></span> &ndash;&gt;
-            Niepoprawny email
         </div>
-    </div>-->
+    </div>
 
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
@@ -27,15 +26,15 @@
                     <h3 class="panel-title">Załóż konto</h3>
                 </div>
                 <div class="panel-body">
-                    <form role="form" method="post">
+                    <form role="form" method="post" th:object="${newUser}" th:action="@{/account/register/mail/send}">
                         <fieldset>
                             <div class="form-group">
-                                <input class="form-control" id="firstNameInput" placeholder="imię"/>
-                                <input class="form-control" id="lastNameInput" placeholder="nazwisko"/>
-                                <input class="form-control" id="userMailInput" placeholder="email"/>
-                                <input class="form-control" id="phoneInput" placeholder="numer telefonu"/>
+                                <input class="form-control" id="firstNameInput" th:field="*{firstName}" placeholder="imię"/>
+                                <input class="form-control" id="lastNameInput" th:field="*{lastName}" placeholder="nazwisko"/>
+                                <input class="form-control" id="userMailInput" th:field="*{email}" placeholder="email"/>
+                                <input class="form-control" id="phoneInput" th:field="*{phoneNumber}" placeholder="numer telefonu"/>
                                 <div class="input-group">
-                                    <input class="form-control" id="passwordfield" type="password" placeholder="hasło"/>
+                                    <input class="form-control" th:field="*{password}" id="passwordfield" type="password" placeholder="hasło"/>
                                     <div class="input-group-addon fa fa-eye btn" onmousedown="ShowPassword()" onmouseup="HidePassword()"/>
                                 </div>
                             </div>

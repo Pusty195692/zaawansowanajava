@@ -46,7 +46,6 @@ public class User implements UserDetails {
     @Size(min = 5, max = 64)
     private String password;
 
-
     @Column
     @Pattern(regexp = "^(\\+48)[5-9][0-9]{8}$")
     private String phoneNumber;
@@ -65,9 +64,6 @@ public class User implements UserDetails {
 
     @Column
     private boolean enabled = true;
-
-    @Column
-    private boolean isActive = false;
 
     @ManyToMany(fetch = FetchType.EAGER)
     private Collection<Role> roles = new ArrayList<>();
