@@ -18,15 +18,19 @@ public class Airline {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    @Column
     private Integer schemaVersion;
 
+    @Column
     private String iata;
 
+    @Column
     private String publicName;
 
+    @Column
     private String icao;
 
+    @Column
     private Integer nvls;
-
 
 }

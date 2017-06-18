@@ -19,14 +19,19 @@ public class Destination {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    @Column
     private String country;
 
+    @Column
     private Integer schemaVersion;
 
+    @Column
     private String iata;
 
+    @Column
     private String city;
 
+    @Column
     private HashMap<String, String> publicName;
 
 }

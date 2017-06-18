@@ -18,15 +18,20 @@ public class AircraftType {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    @Column
     private String longDescription;
 
+    @Column
     private Integer schemaVersion;
 
+    @Column
     private String shortDescription;
 
     @JsonProperty("iatamain")
+    @Column
     private String iatamain;
 
+    @Column
     private String iatasub;
 
 
