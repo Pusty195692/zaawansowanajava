@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+<head>
+    <title>User home</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <h2>Flights</h2> <br/>
+    <ul th:each="flight : ${flights}">
+        <div style="border: 1px; border-style: dotted;"><h3 th:text="'Flight number ' + ${flight.id}"></h3>
+        <li th:text="'Direction: ' + ${flight.flightDirection}"></li>
+        <li th:text="${flight.gate}"></li>
+        <li th:text="'Expected boarding time: ' + ${flight.expectedTimeBoarding}"></li>
+        <li th:text="'Schedule date: ' + ${flight.scheduleDate}"></li>
+        <li th:text="'Airline code: ' + ${flight.airlineCode}"></li>
+        <li th:text="'Estimated landing time: ' + ${flight.estimatedLandingTime}"></li>
+        </div>
+    </ul>
+</div>
+</body>
+</html>

@@ -3,8 +3,10 @@ package com.zjava.config;
 import com.zjava.exception.EmailNotUniqueException;
 import com.zjava.model.Role;
 import com.zjava.model.User;
+import com.zjava.model.Flight;
 import com.zjava.service.RoleService;
 import com.zjava.service.UserService;
+import com.zjava.service.FlightsService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -38,6 +40,9 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    //@Autowired
+    //private FlightsService flightsService;
+
     @Override
     public void onApplicationEvent(ApplicationReadyEvent applicationReadyEvent) {
         log.info("onApplicationEvent method invoked");
@@ -48,6 +53,7 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
         if (userService.findUserByEmail(login) == null) {
             initializeAdminUser();
         }
+        //initializeFlights();
     }
 
     private void initializeAdminUser() {
@@ -75,4 +81,15 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
             roleService.addRole(new Role(roleName));
         }
     }
+/*
+    private void initializeFlights(){
+        log.info("initializeFlights method invoked");
+
+        Flight flight = new Flight();
+        try {
+            flightsService.addFlight(flight);
+        } catch (Exception e) {
+            log.error("Random exception");
+        }
+    }*/
 }

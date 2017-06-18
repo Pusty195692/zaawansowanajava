@@ -60,13 +60,13 @@ public class UserService implements UserDetailsService {
 
     @Override
     public User loadUserByUsername(String email) {
-        log.info("loadUserByUsername method from UserService invoked");
+        log.info("loadUserByUsername method from FlightsService invoked");
         return userRepository.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException(String.format("User with email=%s was not found", email)));
     }
 
     public User findUserByEmail(String email) {
-        log.info("findUserByEmail method from UserService invoked");
+        log.info("findUserByEmail method from FlightsService invoked");
         return userRepository.findByEmail(email).orElse(null);
     }
 
