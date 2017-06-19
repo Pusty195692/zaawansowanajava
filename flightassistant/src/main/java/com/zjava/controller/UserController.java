@@ -1,5 +1,6 @@
 package com.zjava.controller;
 
+import com.zjava.controller.model.AccountActivation;
 import com.zjava.controller.model.UserDTO;
 import com.zjava.exception.EmailNotUniqueException;
 import com.zjava.service.EmailService;
@@ -10,10 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -27,6 +25,7 @@ import javax.validation.Valid;
 public class UserController {
 
     protected static final String REGISTER_VIEW = "register";
+    protected static final String ACTIVATE_VIEW = "activateAccount";
 
     @Autowired
     private UserService userService;
@@ -61,10 +60,19 @@ public class UserController {
             return REGISTER_VIEW;
         }
 
+        String token = userService.generateToken();
         userService.addUser(newUser);
-        emailService.sendEmail(userService.constructConfirmationEmail(newUser, userService.generateToken()));
+        userService.createPasswordResetTokenForUser(userService.findUserByEmail(newUser.getEmail()), token);
+        emailService.sendEmail(userService.constructConfirmationEmail(newUser, token));
         attributes.addFlashAttribute("accountCreated", "Wysłany został mail z potwierdzeniem.");
         return "redirect:/login";
+    }
+
+    @GetMapping("account/register/activate/account/token/{token}")
+    public String getActivateAccountView(@PathVariable("token") final String token, @ModelAttribute AccountActivation accountActivation, Model model) {
+        accountActivation.setToken(token);
+        model.addAttribute("accountActivation", accountActivation);
+        return ACTIVATE_VIEW;
     }
 
 }
