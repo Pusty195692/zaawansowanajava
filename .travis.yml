@@ -16,4 +16,4 @@ branches:
  only:
  - develop
  
- before_script: cd zaawansowanajava
+ before_script: cd flightassistant
