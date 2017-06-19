@@ -4,8 +4,6 @@ jdk: oraclejdk8
 
 install: true
 
-script: 
- - "mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install"
 
 cache: 
  directories: 
