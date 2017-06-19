@@ -2,11 +2,14 @@ package com.zjava.model.elements;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.zjava.model.Passenger;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by Adrian on 2017-06-06.
@@ -117,5 +120,20 @@ public class Flight {
 
     @Column
     private String expectedTimeGateClosing;
+
+    @ManyToMany(cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE,
+            CascadeType.REFRESH
+    }, fetch = FetchType.EAGER)
+    private Set<Passenger> passengers = new HashSet<>();
+
+    public boolean containsPassenger(Passenger passenger) {
+        return passengers.contains(passenger);
+    }
+
+    public boolean addPassenger(Passenger passenger) {
+        return passengers.add(passenger);
+    }
 
 }
