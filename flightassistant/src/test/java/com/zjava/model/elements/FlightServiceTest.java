@@ -1,8 +1,8 @@
 package com.zjava.model.elements;
 
 import com.zjava.controller.DataController;
-import com.zjava.repository.elements.DestinationRepository;
-import com.zjava.service.elements.DestinationService;
+import com.zjava.repository.elements.FlightRepository;
+import com.zjava.service.elements.FlightService;
 import lombok.extern.log4j.Log4j2;
 import org.junit.After;
 import org.junit.Before;
@@ -24,33 +24,33 @@ import static org.junit.Assert.assertEquals;
 @SpringBootTest()
 @PropertySource("classpath:application-test.properties ")
 @Log4j2
-public class DestinationTest {
+public class FlightServiceTest {
     @Autowired
-    private DestinationService destinationService;
+    private FlightService flightService;
 
     @Autowired
-    private DestinationRepository destinationRepository;
+    private FlightRepository flightRepository;
 
-    List<Destination> fromApi;
+    List<Flight> fromApi;
 
     @Before
     public void beforeTests() throws Exception {
         DataController dataController = new DataController();
-        fromApi = dataController.getObjectsList(new Destination(), Destination.class,  "v1", "destinations");
-        for(Destination destination : fromApi) {
-            destinationService.save(destination);
+        fromApi = dataController.getObjectsList(new Flight(), Flight.class,  "v3", "flights");
+        for(Flight flight : fromApi) {
+            flightService.save(flight);
         }
     }
 
     @After
     public void afterTests() {
-        destinationService.deleteAll();
+        flightService.deleteAll();
     }
 
     @Test
     public void testFindAll() throws Exception {
-        List<Destination> fromCRUD = destinationService.findAll();
-        long count = destinationService.count();
+        List<Flight> fromCRUD = flightService.findAll();
+        long count = flightService.count();
         assertEquals(fromApi.size(), fromCRUD.size());
     }
 }

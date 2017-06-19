@@ -24,7 +24,7 @@ import static org.junit.Assert.assertEquals;
 @SpringBootTest()
 @PropertySource("classpath:application-test.properties ")
 @Log4j2
-public class AircraftTypeTest {
+public class AircraftTypeServiceTest {
     @Autowired
     private AircraftService aircraftService;
 
