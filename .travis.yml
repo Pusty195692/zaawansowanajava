@@ -16,4 +16,4 @@ branches:
  only:
  - develop
  
- before_script: cd flightassistant
+ before_install: cd flightassistant
