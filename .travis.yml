@@ -3,7 +3,6 @@ sudo: false
 
 jdk:
   - oraclejdk8
-  - openjdk7
 
 install: true
 
@@ -16,4 +15,5 @@ branches:
  only:
  - develop
  
- before_install: cd flightassistant
+before_install: cd flightassistant
+script: ant build 
