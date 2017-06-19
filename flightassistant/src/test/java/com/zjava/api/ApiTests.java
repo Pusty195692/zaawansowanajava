@@ -5,6 +5,7 @@ import com.zjava.model.elements.AircraftType;
 import com.zjava.model.elements.Airline;
 import com.zjava.model.elements.Destination;
 import com.zjava.model.elements.Flight;
+import org.json.simple.JSONArray;
 import org.junit.Test;
 
 import java.util.List;
@@ -44,5 +45,30 @@ public class ApiTests {
         assertEquals(flights.get(0).getClass(), Flight.class);
     }
 
+
+    /***************************************************STARE****************************************************************/
+//    @Test
+//    public void testGetFlightsJSONArray() throws org.json.simple.parser.ParseException {
+//        DataController dataController = new DataController();
+//        JSONArray jsonArray = dataController.getFlightsJSONArray();
+//    }
+//
+//    @Test
+//    public void testGetDestinationsJSONArray() throws org.json.simple.parser.ParseException {
+//        DataController dataController = new DataController();
+//        JSONArray jsonArray = dataController.getDestinationsJSONArray();
+//    }
+//
+//    @Test
+//    public void testGetAircraftTypesJSONArray() throws org.json.simple.parser.ParseException {
+//        DataController dataController = new DataController();
+//        JSONArray jsonArray = dataController.getAircraftTypesJSONArray();
+//    }
+//
+//    @Test
+//    public void testGetAirlinesJSONArray() throws org.json.simple.parser.ParseException {
+//        DataController dataController = new DataController();
+//        JSONArray jsonArray = dataController.getAirlinesJSONArray();
+//    }
 
 }
