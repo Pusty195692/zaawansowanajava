@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+<head>
+    <title>Reservation form</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div style="text-align: center;">
+        <img th:src="@{/images/airline-icon.png}" width="200px" height="200px" />
+    </div>
+        <form class="form-horizontal" th:action="@{/user/reservation/save}" th:object="${passenger}" method="post">
+            <fieldset>
+
+                <!-- Form Name -->
+                <legend>Formularz rezerwacji lotu</legend>
+
+                <!-- Select Basic -->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="selectbasic">Wybierz lot</label>
+                    <div class="col-md-4">
+                        <select id="selectbasic" name="selectbasic" class="form-control">
+                            <option value="" disabled="true" selected="true">Select your option</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="firstNameInput">Imię</label>
+                    <div class="col-md-4">
+                        <input id="firstNameInput" name="firstNameInput" type="text" placeholder="" class="form-control input-md" required="" />
+                    </div>
+                </div>
+
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="lastNameInput">Nazwisko</label>
+                    <div class="col-md-4">
+                        <input id="lastNameInput" name="lastNameInput" type="text" placeholder="" class="form-control input-md" required="" />
+                    </div>
+                </div>
+
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="peselInput">Pesel</label>
+                    <div class="col-md-4">
+                        <input id="peselInput" name="peselInput" type="text" placeholder="" class="form-control input-md" required="" />
+
+                    </div>
+                </div>
+
+
+                <!-- Button -->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="singlebutton"></label>
+                    <div class="col-md-4">
+                        <button style="width: 100%;" id="singlebutton" name="singlebutton" class="btn btn-success">Potwierdź rezerwację</button>
+                    </div>
+                </div>
+            </fieldset>
+    </form>
+</div>
+</body>
+</html>

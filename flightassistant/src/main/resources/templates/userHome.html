@@ -11,14 +11,14 @@
         <tr style="height: 50%">
             <td style="width: 50%; height: 50%;">
                 <div class="admin-menu-1" th:style="'background:url(' + @{/images/loty.jpg} + ');'">
-                    <a class="header-link" href="#" >
+                    <a class="header-link"  th:href="@{/user/flights}" >
                         <span class="header">Podgląd lotów</span>
                     </a>
                 </div>
             </td>
             <td style="width: 50%; height: 50%;background-color: green;">
                 <div class="admin-menu-1" th:style="'background:url(' + @{/images/reservation.jpg} + ');'">
-                    <a class="header-link" href="#" >
+                    <a class="header-link" th:href="@{/user/reservation/0}" >
                         <span class="header" style="left: 20% !important;">Formularz rezerwacji</span>
                     </a>
                 </div>
