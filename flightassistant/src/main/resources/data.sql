@@ -10,3 +10,14 @@ insert into ROLES (id, authority) VALUES
 
 INSERT INTO USERS_ROLES (USER_ID, ROLES_ID)
     VALUES (1,1), (1,2), (2,2), (3,2);
+
+insert into FLIGHTS (id,flight_name) VALUES
+(1,'Lot testowy 1'),
+(2,'Lot testowy 2');
+
+insert into PASSENGERS (id,first_name,last_name,pesel) values
+(1,'Testowy','Pasazer','123456789');
+
+insert into FLIGHTS_PASSENGERS(FLIGHT_ID,PASSENGERS_ID) VALUES
+(1,1);
+

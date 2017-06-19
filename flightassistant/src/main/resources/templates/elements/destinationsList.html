@@ -3,18 +3,23 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layout">
 <head>
-    <title>Admin page</title>
+    <title>Spis kierunków</title>
 </head>
 <body>
 <div layout:fragment="content">
+    <h3>KIERUNKI</h3>
     <table style="width: 100%;height: 700px;border-collapse: separate;;border-spacing: 20px;">
+        <tr>
+            <td>Identyfikator</td>
+            <td>Kraj</td>
+            <td>IATA</td>
+            <td>Miasto</td>
+        </tr>
         <tr th:each="destination : ${destinations}">
             <td th:text="${destination.id}"></td>
             <td th:text="${destination.country}"></td>
-            <td th:text="${destination.schemaVersion}"></td>
             <td th:text="${destination.iata}"></td>
             <td th:text="${destination.city}"></td>
-            <td th:text="${destination.publicName}"></td>
         </tr>
     </table>
 </div>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+<head>
+    <title>All flights</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <table class="table table-bordered table-definition mb-5">
+        <thead class="table-warning">
+        <tr>
+            <th></th>
+            <th style="background-color: #fcf8e3;">Name</th>
+            <th style="background-color: #fcf8e3;">Data odlotu</th>
+            <th style="background-color: #fcf8e3;">Data przylotu</th>
+            <th style="background-color: #fcf8e3;">Kierunek</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:id="'flight-' + ${flight.id}" th:each="flight : ${flights}">
+            <td>
+                <div data-placement="top" data-toggle="tooltip" title="Zapisz się">
+                    <a th:href="'/user/reservation/'+ ${flight.id}">
+                        <button>
+                            <span class="glyphicon glyphicon-pencil"></span>
+                        </button>
+                    </a>
+
+                </div>
+            </td>
+            <td th:text="${flight.flightName}"></td>
+            <td th:text="${flight.scheduleDate}"></td>
+            <td th:text="${flight.estimatedLandingTime}"></td>
+            <td th:text="${flight.flightDirection}"></td>
+        </tr>
+        </tbody>
+        <tfoot>
+        <tr>
+        </tr>
+        </tfoot>
+    </table>
+</div>
+</body>
+</html>
