@@ -38,5 +38,5 @@ public class UserDTO {
     @Pattern(regexp = "^(\\+48)[5-9][0-9]{8}$", message = "{validation.error.phonenumber.format}")
     private String phoneNumber;
 
-    private Set<Role> roles = new HashSet<>();
+    private Boolean isActive = false;
 }

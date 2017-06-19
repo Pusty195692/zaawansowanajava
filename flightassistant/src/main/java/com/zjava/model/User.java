@@ -30,12 +30,10 @@ public class User implements UserDetails {
     @Pattern(regexp = "^\\p{L}{2,40}$")
     private String firstName;
 
-
     @Column(length = 40)
     @Size(min = 0, max = 40)
     @Pattern(regexp = "^\\p{L}{2,40}$")
     private String lastName;
-
 
     @Column(length = 40, unique = true)
     @Size(min = 0, max = 40)
@@ -64,6 +62,9 @@ public class User implements UserDetails {
 
     @Column
     private boolean enabled = true;
+
+    @Column
+    private Boolean isActive = true;
 
     @ManyToMany(fetch = FetchType.EAGER)
     private Collection<Role> roles = new ArrayList<>();
