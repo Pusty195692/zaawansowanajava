@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * Created by Adrian on 2017-06-06.
@@ -18,6 +19,7 @@ import java.util.Date;
 public class Flight {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column
@@ -41,7 +43,7 @@ public class Flight {
 
     @OneToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "id")
-    private AircraftType aircraftType;
+    private Flight aircraftType;
 
     @Column
     private String getExpectedTimeGateClosing;
@@ -118,4 +120,50 @@ public class Flight {
     @Column
     private String expectedTimeGateClosing;
 
+    @Column
+    @JsonIgnore
+    private String iatamain;
+
+    @Column
+    @JsonIgnore
+    private String iatasub;
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (!Flight.class.isAssignableFrom(obj.getClass())) {
+            return false;
+        }
+        final Flight other = (Flight) obj;
+
+        
+        if ((this.flightName == null) ? (other.flightName != null) : !this.flightName.equals(other.flightName)) {
+            return false;
+        }
+
+        if ((this.flightDirection == null) ? (other.flightDirection != null) : !this.flightDirection.equals(other.flightDirection)) {
+            return false;
+        }
+
+        if (this.airlineCode != other.airlineCode) {
+            return false;
+        }
+
+        if (this.terminal != other.terminal) {
+            return false;
+        }
+
+        if (this.flightNumber != other.flightNumber) {
+            return false;
+        }
+        return true;
+    }
+
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(flightName, flightDirection, airlineCode, terminal, flightNumber);
+    }
 }

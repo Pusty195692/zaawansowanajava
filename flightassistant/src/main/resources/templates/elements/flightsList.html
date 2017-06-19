@@ -3,19 +3,29 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layout">
 <head>
-    <title>Admin page</title>
+    <title>Spis lotów</title>
 </head>
 <body>
 <div layout:fragment="content">
+    <h3>LISTA LOTÓW</h3>
     <table style="width: 100%;height: 700px;border-collapse: separate;;border-spacing: 20px;">
+        <tr>
+            <td>Nazwa lotu</td>
+            <td>Data</td>
+            <td>Kierunek lotu</td>
+            <td>Kod linii lotniczej</td>
+            <td>Czas lądowania</td>
+            <td>Terminal</td>
+            <td>Numer lotu</td>
+        </tr>
         <tr th:each="flight : ${flights}">
-            <td th:text="${flight.id}">1</td>
-            <td th:text="${flight.prefixIATA}">1</td>
-            <td th:text="${flight.serviceType}">1</td>
-            <td th:text="${flight.scheduleTime}">1</td>
             <td th:text="${flight.flightName}">1</td>
-            <td th:text="${flight.prefixICAO}">1</td>
-            <td th:text="${flight.expectedTimeBoarding}">1</td>
+            <td th:text="${flight.scheduleDate}">1</td>
+            <td th:text="${flight.flightDirection}">1</td>
+            <td th:text="${flight.airlineCode}">1</td>
+            <td th:text="${flight.actualLandingTime}">1</td>
+            <td th:text="${flight.terminal}">1</td>
+            <td th:text="${flight.flightNumber}">1</td>
         </tr>
     </table>
 </div>
