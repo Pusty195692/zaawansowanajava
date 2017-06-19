@@ -2,12 +2,15 @@ package com.zjava.model.elements;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.zjava.model.Passenger;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
 import java.util.Objects;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by Adrian on 2017-06-06.
@@ -128,6 +131,21 @@ public class Flight {
     @JsonIgnore
     private String iatasub;
 
+    @ManyToMany(cascade = {
+        CascadeType.PERSIST,
+        CascadeType.MERGE,
+        CascadeType.REFRESH
+    }, fetch = FetchType.EAGER)
+    private Set<Passenger> passengers = new HashSet<>();
+
+    public boolean containsPassenger(Passenger passenger) {
+        return passengers.contains(passenger);
+    }
+
+    public boolean addPassenger(Passenger passenger) {
+        return passengers.add(passenger);
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -161,7 +179,7 @@ public class Flight {
         return true;
     }
 
-
+    
     @Override
     public int hashCode() {
         return Objects.hash(flightName, flightDirection, airlineCode, terminal, flightNumber);
