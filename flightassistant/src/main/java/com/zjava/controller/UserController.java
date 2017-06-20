@@ -3,6 +3,8 @@ package com.zjava.controller;
 import com.zjava.controller.model.AccountActivation;
 import com.zjava.controller.model.UserDTO;
 import com.zjava.exception.EmailNotUniqueException;
+import com.zjava.model.PasswordResetToken;
+import com.zjava.model.User;
 import com.zjava.service.EmailService;
 import com.zjava.service.UserService;
 import lombok.extern.log4j.Log4j2;
@@ -73,6 +75,29 @@ public class UserController {
         accountActivation.setToken(token);
         model.addAttribute("accountActivation", accountActivation);
         return ACTIVATE_VIEW;
+    }
+
+    @PostMapping("account/register/activate")
+    public String activateAccount(@Valid AccountActivation accountActivation, BindingResult bindingResult, Model model, RedirectAttributes attributes) throws EmailNotUniqueException {
+
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("accountActivation", accountActivation);
+            model.addAttribute("errors", bindingResult.getFieldErrors());
+            log.info("token validation error." + bindingResult.getAllErrors());
+            return ACTIVATE_VIEW;
+        }
+
+        User user = userService.findUserByToken(accountActivation.getToken());
+        if (user == null) {
+            log.info("user is null");
+            attributes.addFlashAttribute("accountActivatedOrNotActivated", "Jeśli konto istnieje, zostało aktywowane.");
+            return "redirect:/login";
+        }
+        user.setIsActive(true);
+        userService.updateUser(user);
+        log.info("user " + user.getEmail() + " account activated");
+        attributes.addFlashAttribute("accountActivatedOrNotActivated", "Jeśli konto istnieje, zostało aktywowane.");
+        return "redirect:/login";
     }
 
 }

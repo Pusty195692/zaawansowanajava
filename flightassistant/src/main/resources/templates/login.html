@@ -23,6 +23,11 @@
         Wysłany został mail z potwierdzeniem.
     </div>
 
+    <div th:if="${accountActivatedOrNotActivated} != null" class="alert alert-info">
+        <!--<p th:text="${#messages.msg('passwordChangedOrNotChanged')}"></p> -->
+        Jeśli konto istnieje zostało aktywowane.
+    </div>
+
 <div class="loginmodal-container">
     <h1>Login to Your Account</h1><br/>
     <form th:action="@{/login}" method="post" role="form">
