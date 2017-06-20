@@ -1,5 +1,6 @@
 package com.zjava.service.elements;
 
+import com.zjava.model.Passenger;
 import com.zjava.model.elements.Flight;
 import com.zjava.repository.elements.FlightRepository;
 import lombok.RequiredArgsConstructor;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -42,6 +44,10 @@ public class FlightService {
     }
 
     public void deleteAll() {flightRepository.deleteAll();}
+
+    public Flight getFlightById(Long id) {
+        return flightRepository.findOne(id);
+    }
 
     public Flight findFlightById(Long id){
         log.info("Searching for flight with id[" + id + "]");

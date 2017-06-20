@@ -7,10 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Date;
-import java.util.Objects;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by Adrian on 2017-06-06.
@@ -143,6 +140,11 @@ public class Flight {
 
     public boolean addPassenger(Passenger passenger) {
         return passengers.add(passenger);
+    }
+
+    public List<Passenger> getPassengersForView() {
+        List<Passenger> list = new ArrayList<Passenger>(passengers);
+        return list;
     }
 
     @Override

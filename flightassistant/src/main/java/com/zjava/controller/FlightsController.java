@@ -27,6 +27,8 @@ public class FlightsController {
 
     private final FlightService flighService;
 
+    protected static final String FLIGHT_DETAILS = "flightDetails";
+
     @GetMapping("/user/flights")
     public String showFlightsForUser(Model model){
         List<Flight> allFlights = flighService.findAll();
@@ -50,6 +52,20 @@ public class FlightsController {
         }
         model.addAttribute("viewModel",viewModel);
         return "reservationForm";
+    }
+
+    @GetMapping("/admin/flights")
+    public String showFlightsForAdmin(Model model){
+        List<Flight> allFlights = flighService.findAll();
+        model.addAttribute("flights", allFlights);
+        return "flightsAdmin";
+    }
+
+    @GetMapping("/admin/flights/details/flight/{flightId}")
+    public String getFlightDetailsView(@PathVariable("flightId") final Long id, Model model) {
+        model.addAttribute("flight", flighService.getFlightById(id));
+        model.addAttribute("passengers", flighService.getFlightById(id).getPassengersForView());
+        return FLIGHT_DETAILS;
     }
 
     @PostMapping("/user/reservation/save")
