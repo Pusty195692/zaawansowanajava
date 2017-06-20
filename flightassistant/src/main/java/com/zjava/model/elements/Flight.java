@@ -44,9 +44,8 @@ public class Flight {
     @Column
     private String expectedTimeBoarding;
 
-    @OneToOne(cascade = {CascadeType.ALL})
-    @JoinColumn(name = "id")
-    private Flight aircraftType;
+    @JsonIgnore
+    private String aircraftType;
 
     @Column
     private String getExpectedTimeGateClosing;

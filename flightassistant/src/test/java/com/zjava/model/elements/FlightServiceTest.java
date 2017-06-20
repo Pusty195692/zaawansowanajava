@@ -52,6 +52,6 @@ public class FlightServiceTest {
     public void testFindAll() throws Exception {
         List<Flight> fromCRUD = flightService.findAll();
         long count = flightService.count();
-        assertEquals(0,0);
+        assertEquals(fromApi.size() + fromRepoBefore.size(),fromCRUD.size());
     }
 }
