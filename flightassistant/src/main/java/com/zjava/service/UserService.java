@@ -66,6 +66,12 @@ public class UserService implements UserDetailsService {
                 .collect(Collectors.toList());
     }
 
+    public User findUserById(Integer id) {
+        log.info("Searching for user with id[" + id + "]");
+
+        return userRepository.findOne(id);
+    }
+
     @Override
     public User loadUserByUsername(String email) {
         log.info("loadUserByUsername method from UserService invoked");

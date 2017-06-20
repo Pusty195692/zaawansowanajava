@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 /**
  * Created by Rafal Lebioda on 16.06.2017.
@@ -42,6 +43,8 @@ public class UserServiceTest {
         user1=new User();
         user2=new User();
         user3=new User();
+        user3.setFirstName("user");
+        user3.setEmail("user@user.com");
 
         userRepository.save(user1);
         userRepository.save(user2);
@@ -61,6 +64,34 @@ public class UserServiceTest {
         // assert
         assertEquals("Size of returned list will be the same as the size of prepared list of users", users.size(), usersFromRepository.size());
     }
+
+    @Test
+    public void addUserTest(){
+        try {
+            User newUser=new User();
+            newUser.setPassword("$2a$12$jsm4Mbse40VEL/FlMHwk3OyHry0WZ2sZKZkIk92DnZTGoQfzLh1Pq");
+            userService.addUser(newUser);
+        }
+        catch (Exception ex){}
+        assertEquals("number of users in repository is expected to be 3", 3, userService.findAllUsers().size());
+    }
+
+   @Test
+   public void findUserByIdTest(){
+       // act
+       userRepository.save(user3);
+
+       // assert
+       assertNotNull("Null will not be returned", userService.findUserById(user3.getId()));
+       assertEquals("Returned user will be 'user'", "user", userService.findUserById(user3.getId()).getFirstName());
+   }
+
+   @Test
+   public void findUserByEmail(){
+       userRepository.save(user3);
+
+       assertEquals("Returned user will be 'user'", "user", userService.findUserByEmail("user@user.com").getFirstName());
+   }
 
 
     @After
