@@ -60,7 +60,7 @@ public class RoleServiceTest {
     }
 
     @Test
-    public void findAllRoles(){
+    public void findAllRolesTest(){
         // preparation
         List<Role> roles = new ArrayList<>();
         roles.add(new Role());
@@ -70,11 +70,11 @@ public class RoleServiceTest {
         rolesFromRepository = roleService.findAllRoles();
 
         // assert
-        assertEquals("Size of returned list will be the same as the size of prepared list of users", roles.size(), rolesFromRepository.size());
+        assertEquals("Size of returned list will be the same as the size of prepared list of roles", roles.size(), rolesFromRepository.size());
     }
 
     @Test
-    public void findRoleByName(){
+    public void findRoleByNameTest(){
         roleRepository.save(role2);
 
         assertEquals("Returned role will be 'USER'", "ROLE_ADMIN", roleService.findRoleByName("ROLE_ADMIN").get().getAuthority());
