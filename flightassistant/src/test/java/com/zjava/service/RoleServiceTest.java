@@ -1,6 +1,7 @@
 package com.zjava.service;
 
 import com.zjava.model.Role;
+import com.zjava.model.User;
 import com.zjava.repository.RoleRepository;
 import com.zjava.repository.UserRepository;
 import lombok.extern.log4j.Log4j2;
@@ -12,6 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
@@ -53,6 +57,27 @@ public class RoleServiceTest {
         roleService.addRole(role2);
 
         assertEquals("number of roles in repository is expected to be 2", 2, roleService.findAllRoles().size());
+    }
+
+    @Test
+    public void findAllRoles(){
+        // preparation
+        List<Role> roles = new ArrayList<>();
+        roles.add(new Role());
+        List<Role> rolesFromRepository;
+
+        // act
+        rolesFromRepository = roleService.findAllRoles();
+
+        // assert
+        assertEquals("Size of returned list will be the same as the size of prepared list of users", roles.size(), rolesFromRepository.size());
+    }
+
+    @Test
+    public void findRoleByName(){
+        roleRepository.save(role2);
+
+        assertEquals("Returned role will be 'USER'", "ROLE_ADMIN", roleService.findRoleByName("ROLE_ADMIN").get().getAuthority());
     }
 
     @After
