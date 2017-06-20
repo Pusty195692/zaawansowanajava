@@ -15,5 +15,3 @@ branches:
  only:
  - develop
  
-before_install: cd flightassistant
-script: ant build
