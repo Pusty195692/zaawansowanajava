@@ -1,5 +1,6 @@
 package com.zjava.controller;
 
+import com.zjava.controller.model.ReservationFormModel;
 import com.zjava.model.Passenger;
 import com.zjava.model.elements.Flight;
 import com.zjava.service.elements.FlightService;
@@ -7,10 +8,13 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.inject.Inject;
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -31,18 +35,38 @@ public class FlightsController {
     }
 
     @GetMapping("/user/reservation/{flightId}")
-    public String showReservationForm(@PathVariable("flightId") final Integer id,Model model){
-        model.addAttribute("flights", flighService.findAll());
-        model.addAttribute("passenger",new Passenger());
-        Flight flight=new Flight();
+    public String showReservationForm(@PathVariable("flightId") final Long id,Model model){
+        ReservationFormModel viewModel=new ReservationFormModel();
+        viewModel.setFlights(flighService.findAll());
+        viewModel.setPassenger(new Passenger());
+
         if(id==0)
         {
-            model.addAttribute("flight",new Flight());
+            viewModel.setFlight(new Flight());
         }
         else
         {
-            model.addAttribute("flight",new Flight()); //TO DO
+            viewModel.setFlight(flighService.findFlightById(id));
         }
+        model.addAttribute("viewModel",viewModel);
         return "reservationForm";
+    }
+
+    @PostMapping("/user/reservation/save")
+    public String saveReservation(@Valid ReservationFormModel viewModel, BindingResult bindingResult, Model model) {
+        if(viewModel!=null && viewModel.getFlight().getId() != null){
+            Flight flight=flighService.findFlightById(viewModel.getFlight().getId());
+            if(flight.containsPassenger(viewModel.getPassenger())==false){
+                flight.addPassenger(viewModel.getPassenger());
+                Flight temp=flighService.updateFlightPassengers(flight);
+            }
+            else {
+                log.info("Taki pasażer już jest w danym locie");
+            }
+        }
+        else{
+
+        }
+        return "redirect:/user/home";
     }
 }

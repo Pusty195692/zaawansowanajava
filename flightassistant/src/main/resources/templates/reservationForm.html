@@ -10,7 +10,7 @@
     <div style="text-align: center;">
         <img th:src="@{/images/airline-icon.png}" width="200px" height="200px" />
     </div>
-        <form class="form-horizontal" th:action="@{/user/reservation/save}" th:object="${passenger}" method="post">
+        <form class="form-horizontal" th:action="@{/user/reservation/save}" th:object="${viewModel}" method="post">
             <fieldset>
 
                 <!-- Form Name -->
@@ -20,8 +20,12 @@
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="selectbasic">Wybierz lot</label>
                     <div class="col-md-4">
-                        <select id="selectbasic" name="selectbasic" class="form-control">
+                        <select id="selectbasic" name="selectbasic" class="form-control" th:field="*{flight.id}" th:if="*{flight.id == null}" >
                             <option value="" disabled="true" selected="true">Select your option</option>
+                            <option th:each="flight : ${viewModel.flights}" th:value="${flight.id}" th:text="${flight.flightName}" ></option>
+                        </select>
+                        <select id="selectbasic" name="selectbasic" class="form-control" th:field="*{flight.id}" th:if="*{flight.id != null}" >
+                            <option  th:value="*{flight.id}" th:text="*{flight.flightName}" selected="true" ></option>
                         </select>
                     </div>
                 </div>
@@ -30,7 +34,7 @@
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="firstNameInput">Imię</label>
                     <div class="col-md-4">
-                        <input id="firstNameInput" name="firstNameInput" type="text" placeholder="" class="form-control input-md" required="" />
+                        <input id="firstNameInput" name="firstNameInput" type="text" placeholder="" class="form-control input-md" required="" th:field="*{passenger.firstName}" />
                     </div>
                 </div>
 
@@ -38,7 +42,7 @@
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="lastNameInput">Nazwisko</label>
                     <div class="col-md-4">
-                        <input id="lastNameInput" name="lastNameInput" type="text" placeholder="" class="form-control input-md" required="" />
+                        <input id="lastNameInput" name="lastNameInput" type="text" placeholder="" class="form-control input-md" required="" th:field="*{passenger.lastName}" />
                     </div>
                 </div>
 
@@ -46,7 +50,7 @@
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="peselInput">Pesel</label>
                     <div class="col-md-4">
-                        <input id="peselInput" name="peselInput" type="text" placeholder="" class="form-control input-md" required="" />
+                        <input id="peselInput" name="peselInput" type="text" placeholder="" class="form-control input-md" required="" th:field="*{passenger.pesel}" />
 
                     </div>
                 </div>

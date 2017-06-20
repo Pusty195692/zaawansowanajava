@@ -138,7 +138,7 @@ public class Flight {
     private Set<Passenger> passengers = new HashSet<>();
 
     public boolean containsPassenger(Passenger passenger) {
-        return passengers.contains(passenger);
+        return passengers.stream().filter(o -> o.getPesel().equals(passenger.getPesel())).findFirst().isPresent();
     }
 
     public boolean addPassenger(Passenger passenger) {

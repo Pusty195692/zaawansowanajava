@@ -9,6 +9,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Collection;
 import java.util.List;
@@ -22,7 +23,7 @@ import java.util.List;
 public class HomeController {
 
     @RequestMapping("/")
-    public String home(@AuthenticationPrincipal User user) {
+    public String home(@AuthenticationPrincipal User user,HttpServletRequest req) throws ServletException {
         String role;
         if(user==null || !user.getIsActive()){
             return "redirect:/login-error";
@@ -38,7 +39,8 @@ public class HomeController {
             }
             else{
                 log.info("Current user hasn't got any roles");
-                return "redirect:/login";
+                req.logout();
+                return "redirect:/logout";
             }
         }
     }

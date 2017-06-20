@@ -42,4 +42,18 @@ public class FlightService {
     }
 
     public void deleteAll() {flightRepository.deleteAll();}
+
+    public Flight findFlightById(Long id){
+        log.info("Searching for flight with id[" + id + "]");
+
+        return flightRepository.findOne(id);
+    }
+
+    public Flight updateFlightPassengers(Flight flight){
+        log.info("Updating flight: " + flight);
+        Flight flightToUpdate = flightRepository.findOne(flight.getId());
+        flightToUpdate.setPassengers(flight.getPassengers());
+        flightToUpdate=flightRepository.save(flightToUpdate);
+        return flightToUpdate;
+    }
 }
