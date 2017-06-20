@@ -28,9 +28,6 @@ public class DestinationServiceTest {
     @Autowired
     private DestinationService destinationService;
 
-    @Autowired
-    private DestinationRepository destinationRepository;
-
     List<Destination> fromApi;
     List<Destination> fromRepoBefore;
 
@@ -52,7 +49,18 @@ public class DestinationServiceTest {
     @Test
     public void testFindAll() throws Exception {
         List<Destination> fromCRUD = destinationService.findAll();
-        long count = destinationService.count();
         assertEquals(fromApi.size() + fromRepoBefore.size(), fromCRUD.size());
+    }
+
+    @Test
+    public void testCount() throws Exception {
+        List<Destination> fromCRUD = destinationService.findAll();
+        assertEquals(fromApi.size() + fromRepoBefore.size(), destinationService.count());
+    }
+
+    @Test
+    public void deleteAll() throws Exception {
+        destinationService.deleteAll();
+        assertEquals(0, destinationService.count());
     }
 }

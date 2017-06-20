@@ -69,12 +69,9 @@ public class DataController {
 
         List<T> list;
         ObjectMapper mapper = new ObjectMapper();
-        System.out.println(json);
         TypeFactory t = TypeFactory.defaultInstance();
         list = mapper.readValue(json, t.constructCollectionType(ArrayList.class, clazz));
 
-        System.out.println(list);
-        System.out.println(list.get(0).getClass());
         return list;
     }
 
@@ -173,12 +170,6 @@ public class DataController {
         return "elements/flightsList";
     }
 
-//    @RequestMapping(value = "aircraftTypes", method = RequestMethod.GET)
-//    public String messages(Model model) {
-//        model.addAttribute("aircraftTypes", aircraftService.findAll());
-//        return "aircraftTypes/list";
-//    }
-
     /**********************************************************STARE METODY*******************************************************************/
 
 
@@ -196,7 +187,7 @@ public class DataController {
                 JSONParser parser = new JSONParser();
                 JSONObject jsonObject = (JSONObject) parser.parse(responseBody);
                 elements = (JSONArray) jsonObject.get(objectType);
-                System.out.println("found " + elements.size() + " " + objectType);
+//                System.out.println("found " + elements.size() + " " + objectType);
                 elements.forEach(System.out::println);
             } else {
                 System.out.println(
