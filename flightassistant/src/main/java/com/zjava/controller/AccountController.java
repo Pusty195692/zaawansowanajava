@@ -22,7 +22,7 @@ import javax.validation.Valid;
 @Controller
 public class AccountController {
 
-    private static final String ACCOUNT_VIEW = "account";
+    protected static final String ACCOUNT_VIEW = "account";
 
     @Autowired
     private UserService userService;
