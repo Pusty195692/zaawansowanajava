@@ -100,8 +100,8 @@ public class ResetPasswordControllerTest {
         RedirectAttributes redirectAttributes = new RedirectAttributesModelMap();
 
         User user = new User();
-        user.setFirstName("test");
-        user.setLastName("test");
+        user.setFirstName("Test");
+        user.setLastName("Test");
         user.setEmail("example@example.com");
         user.setPassword("password");
         user.setPhoneNumber("+48608456789");
@@ -124,8 +124,8 @@ public class ResetPasswordControllerTest {
         RedirectAttributes redirectAttributes = new RedirectAttributesModelMap();
 
         User user = new User();
-        user.setFirstName("test");
-        user.setLastName("test");
+        user.setFirstName("Test");
+        user.setLastName("Test");
         user.setEmail("example@example.com");
         user.setPassword("password");
         user.setPhoneNumber("+48608456789");
@@ -146,8 +146,8 @@ public class ResetPasswordControllerTest {
         RedirectAttributes redirectAttributes = new RedirectAttributesModelMap();
 
         User user = new User();
-        user.setFirstName("test");
-        user.setLastName("test");
+        user.setFirstName("Test");
+        user.setLastName("Test");
         user.setEmail("example@example.com");
         user.setPassword("password");
         user.setPhoneNumber("+48608456789");
