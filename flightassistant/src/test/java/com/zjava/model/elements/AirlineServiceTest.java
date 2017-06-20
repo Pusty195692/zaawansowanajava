@@ -28,9 +28,6 @@ public class AirlineServiceTest {
     @Autowired
     private AirlineService airlineService;
 
-    @Autowired
-    private AirlineRepository airlineRepository;
-
     List<Airline> fromApi;
     List<Airline> fromRepoBefore;
 
@@ -52,7 +49,18 @@ public class AirlineServiceTest {
     @Test
     public void testFindAll() throws Exception {
         List<Airline> fromCRUD = airlineService.findAll();
-        long count = airlineService.count();
         assertEquals(fromApi.size() + fromRepoBefore.size(), fromCRUD.size());
+    }
+
+    @Test
+    public void testCount() throws Exception {
+        List<Airline> fromCRUD = airlineService.findAll();
+        assertEquals(fromApi.size() + fromRepoBefore.size(), airlineService.count());
+    }
+
+    @Test
+    public void deleteAll() throws Exception {
+        airlineService.deleteAll();
+        assertEquals(0, airlineService.count());
     }
 }

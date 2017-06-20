@@ -29,8 +29,8 @@ public class AirlineService {
     @Value("${protocol:http}")
     private String protocol;
 
-    public Airline save(Airline aircraftType) {
-        return airlineRepository.save(aircraftType);
+    public Airline save(Airline airline) {
+        return airlineRepository.save(airline);
     }
 
     public List<Airline> findAll() {

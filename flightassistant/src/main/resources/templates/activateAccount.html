@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+<head>
+    <meta charset="UTF-8"/>
+    <title>activate account</title>
+</head>
+<body>
+    <div th:if="${errors != null}" class="row">
+        <div class="alert alert-danger fade in">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <!--<span th:text="${error.defaultMessage}"></span> -->
+            Token wygasł.
+        </div>
+    </div>
+
+    <div layout:fragment="content">
+            <form th:action="@{/account/register/activate}" method="post" role="form" th:object="${accountActivation}">
+                <input type="hidden" th:field="*{token}" name="token"/>
+                <input type="submit"  class="btn btn-info btn-lg" value="Click in order to activate account"/>
+            </form>
+    </div>
+</body>
+</html>

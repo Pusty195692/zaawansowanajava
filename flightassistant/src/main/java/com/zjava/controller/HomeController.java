@@ -26,7 +26,7 @@ public class HomeController {
     public String home(@AuthenticationPrincipal User user,HttpServletRequest req) throws ServletException {
         String role;
         if(user==null || !user.getIsActive()){
-            return "redirect:/login-error";
+            return "redirect:/login";
         }
         else{
             if(user.getRoles().stream().filter(r -> StringUtils.equals(Role.Name.ADMIN, r.getAuthority())).findFirst().isPresent()) {

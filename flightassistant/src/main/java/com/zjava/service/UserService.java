@@ -179,7 +179,7 @@ public class UserService implements UserDetailsService {
     public SimpleMailMessage constructConfirmationEmail(UserDTO userDTO, String token) {
         List<String> to = new ArrayList<>();
         to.add(userDTO.getEmail());
-        String url = protocol + "://" + host + ":" + port + "/account/register/confirm/token/" + token;
+        String url = protocol + "://" + host + ":" + port + "/account/register/activate/account/token/" + token;
         Message message = new Message("flightassistant2017@gmail.com", to, "Confirm email", url);
         return message.constructEmail();
     }
@@ -193,6 +193,7 @@ public class UserService implements UserDetailsService {
             userToUpdate.setPhoneNumber(user.getPhoneNumber());
             userToUpdate.setEmail(user.getEmail().toLowerCase());
             userToUpdate.setProfileImageUrl(user.getProfileImageUrl());
+            userToUpdate.setIsActive(user.getIsActive());
             userToUpdate=userRepository.save(userToUpdate);
             Authentication authentication = new UsernamePasswordAuthenticationToken(user, user.getPassword(), user.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authentication);
@@ -201,6 +202,10 @@ public class UserService implements UserDetailsService {
         catch (DataIntegrityViolationException e) {
             throw new EmailNotUniqueException(e);
         }
+    }
+
+    public User findUserByToken(String token) {
+        return tokenRepository.findByToken(token).getUser();
     }
 
 
