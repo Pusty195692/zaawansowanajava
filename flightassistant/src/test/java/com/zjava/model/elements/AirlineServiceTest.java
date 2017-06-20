@@ -32,11 +32,13 @@ public class AirlineServiceTest {
     private AirlineRepository airlineRepository;
 
     List<Airline> fromApi;
+    List<Airline> fromRepoBefore;
 
     @Before
     public void beforeTests() throws Exception {
         DataController dataController = new DataController();
         fromApi = dataController.getObjectsList(new Airline(), Airline.class,  "v1", "airlines");
+        fromRepoBefore = airlineService.findAll();
         for(Airline airline : fromApi) {
             airlineService.save(airline);
         }
@@ -51,6 +53,6 @@ public class AirlineServiceTest {
     public void testFindAll() throws Exception {
         List<Airline> fromCRUD = airlineService.findAll();
         long count = airlineService.count();
-        assertEquals(fromApi.size(), fromCRUD.size());
+        assertEquals(fromApi.size() + fromRepoBefore.size(), fromCRUD.size());
     }
 }

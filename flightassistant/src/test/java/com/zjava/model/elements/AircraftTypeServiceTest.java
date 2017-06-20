@@ -32,11 +32,13 @@ public class AircraftTypeServiceTest {
     private AircraftTypeRepository aircraftTypeRepository;
 
     List<AircraftType> fromApi;
+    List<AircraftType> fromRepoBefore;
 
     @Before
     public void beforeTests() throws Exception {
         DataController dataController = new DataController();
         fromApi = dataController.getObjectsList(new AircraftType(), AircraftType.class,  "v1", "aircraftTypes");
+        fromRepoBefore = aircraftService.findAll();
         for(AircraftType aircraftType : fromApi) {
             aircraftService.save(aircraftType);
         }
@@ -51,6 +53,6 @@ public class AircraftTypeServiceTest {
     public void testFindAll() throws Exception {
         List<AircraftType> fromCRUD = aircraftService.findAll();
         long count = aircraftService.count();
-        assertEquals(fromApi.size(), fromCRUD.size());
+        assertEquals(fromApi.size() + fromRepoBefore.size(), fromCRUD.size());
     }
 }
